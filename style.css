@@ -171,13 +171,15 @@ textarea.input-error {
 }
 
 .file-upload-area {
+  display: block;
   border: 2px dashed var(--border);
   border-radius: var(--radius-sm);
   background-color: #f8fafc;
-  padding: 16px;
+  padding: 20px 16px;
   text-align: center;
   transition: var(--transition);
   cursor: pointer;
+  user-select: none;
 }
 
 .file-upload-area:hover,
@@ -198,7 +200,6 @@ textarea.input-error {
   font-weight: 600;
   color: var(--primary);
   cursor: pointer;
-  pointer-events: none; /* 클릭 이벤트가 file-upload-area로 전달되도록 함 */
 }
 
 .file-upload-btn svg {
