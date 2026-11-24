@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온라인 방명록 | Guestbook</title>
+  <!-- Google Fonts & Pretendard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">💬 Guestbook</div>
+      <h1 class="title">온라인 방명록</h1>
+      <p class="subtitle">소중한 발자취와 따뜻한 한마디를 남겨주세요.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Input Card -->
+      <section class="card form-card">
+        <h2 class="card-title">방명록 남기기</h2>
+        <form id="guestbook-form" novalidate>
+          <div class="form-group">
+            <label for="user-name">작성자 이름</label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="user-name" 
+                placeholder="이름이나 닉네임을 입력하세요" 
+                maxlength="20"
+                autocomplete="off"
+                required
+              >
+              <span class="char-count" id="name-count">0/20</span>
+            </div>
+            <p class="error-text" id="name-error">이름을 입력해주세요.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="user-message">남길 메시지</label>
+            <div class="input-wrapper">
+              <textarea 
+                id="user-message" 
+                placeholder="따뜻한 응원이나 인사말을 적어주세요 :)" 
+                rows="4" 
+                maxlength="300"
+                required
+              ></textarea>
+              <span class="char-count" id="message-count">0/300</span>
+            </div>
+            <p class="error-text" id="message-error">메시지 내용을 입력해주세요.</p>
+          </div>
+
+          <button type="submit" id="submit-btn" class="submit-btn">
+            <span class="btn-text">등록하기</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Message List Section -->
+      <section class="list-section">
+        <div class="list-header">
+          <h2 class="list-title">방명록 목록</h2>
+          <span class="count-badge" id="total-count">0개의 글</span>
+        </div>
+
+        <!-- System Alert Banner (권한 에러나 설정 미완료 시 안내) -->
+        <div id="setup-alert" class="alert-box hidden">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-content">
+            <strong id="alert-title">Firestore 연결 필요</strong>
+            <p id="alert-desc">Firebase 콘솔에서 Firestore 데이터베이스 생성 및 보안 규칙 설정이 필요합니다.</p>
+          </div>
+        </div>
+
+        <!-- Skeleton / Loading State -->
+        <div id="loading-spinner" class="loading-state">
+          <div class="spinner"></div>
+          <p>방명록을 불러오는 중입니다...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state hidden">
+          <div class="empty-icon">📝</div>
+          <h3>아직 작성된 방명록이 없습니다</h3>
+          <p>첫 번째 발자취를 남겨보세요!</p>
+        </div>
+
+        <!-- Posts Container -->
+        <div id="messages-container" class="messages-container"></div>
+      </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Powered by Firebase Cloud Firestore</p>
+    </footer>
+  </div>
+
+  <!-- Main JavaScript with Firebase Modules -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
